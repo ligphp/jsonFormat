@@ -4,8 +4,8 @@ function JsonFormater(opt) {
         tabSize: 2,
         singleTab: "  ",
         quoteKeys: true,
-        //imgCollapsed: "http://host.hatustudio.com/images/Collapsed.gif",
-        //imgExpanded: "http://host.hatustudio.com/images/Expanded.gif",
+        imgCollapsed: "",
+        imgExpanded: "",
         isCollapsible: true
     }, opt || {});
     this.isFormated = false;
@@ -159,7 +159,7 @@ JsonFormater.prototype = {
             if (obj.length == 0) {
                 html += this.getRow(indent, "<span class='jf-ArrayBrace'>[ ]</span>" + comma, isPropertyContent);
             } else {
-                clpsHtml = this.options.isCollapsible ? "<span><img class='imgToggle' data-status='1' src='" + this.options.imgExpanded + "'/></span><span class='jf-collapsible'>" : "";
+                clpsHtml = this.options.isCollapsible ? "<span class='jf-collapsible'>" : "";
                 html += this.getRow(indent, "<span class='jf-ArrayBrace'>[</span>" + clpsHtml, isPropertyContent);
                 for (var i = 0; i < obj.length; i++) {
                     html += this.ProcessObject(obj[i], indent + 1, i < (obj.length - 1), true, false);
@@ -176,7 +176,7 @@ JsonFormater.prototype = {
                 if (numProps == 0) {
                     html += this.getRow(indent, "<span class='jf-ObjectBrace'>{ }</span>" + comma, isPropertyContent);
                 } else {
-                    clpsHtml = this.options.isCollapsible ? "<span><img class='imgToggle' data-status='1' src='" + this.options.imgExpanded + "'/></span><span class='jf-collapsible'>" : "";
+                    clpsHtml = this.options.isCollapsible ? "<span class='jf-collapsible'>" : "";
                     html += this.getRow(indent, "<span class='jf-ObjectBrace'>{</span>" + clpsHtml, isPropertyContent);
                     var j = 0;
                     for (prop in obj) {
