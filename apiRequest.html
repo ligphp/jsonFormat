@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>API接口测试</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="jquery-1.11.1.js"></script>
+        <script type="text/javascript" src="jsonFormater.js"></script>
+        <link type="text/css" href="jsonFormater.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <form id="testform" action="" method="">
+            <div id="testdiv">
+                <div>请求地址：<input type="text" id="url" /></div>
+                <div>请求类型：<input type="text" id="method" /><label>&nbsp;POST/GET请求</label></div>
+                <div style="height: 15px;">&nbsp;</div>
+                <div style="height: 30px;">请求参数：</div>
+                <div>NAME:<input style="width: 100px;" type="text" class="namee" />&nbsp;&nbsp;VALUE:<input style="width: 100px;" type="text" name="" class="valuee" value="" />&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="add(this)">添加</a></div>
+            </div>
+            <div style="height: 30px;">&nbsp;</div>
+        </form>
+        <div style="width: 30px;">&nbsp;</div>
+        <div><a href="javascript:void(0)" onclick="sub()">提交</a></div>
+        <div style="width: 30px;">&nbsp;</div>
+        <div style="background: rgb(236, 255, 236);">
+            <h2 style="margin-top: 60px;">返回值</h2>
+            <div id="result">
+
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        function add() {
+            $('#testdiv').append($('#chr').html());
+        }
+        $(document).on("click", ".del", function () {
+            $(this).parent().remove();
+        });
+        function sub() {
+            $('#result').html("");
+            $('.valuee').each(function () {
+                $(this).attr('name', $(this).prev('.namee').val());
+            });
+            var data = $('#testform').serialize();
+            $.ajax({
+                type: $('#method').val(),
+                url: $('#url').val(),
+                data: data,
+                dataType: "json",
+                success: function (rel) {
+                    var options = {
+                        dom: '#result' //对应容器的css选择器
+                    };
+                    var jf = new JsonFormater(options); //创建对象
+                    jf.doFormat(rel); //格式化json
+                }
+            });
+        }
+    </script>
+    <script type="text/html" id="chr">
+        <div class="ddd">NAME:<input style="width: 100px;" type="text" class="namee" />&nbsp;&nbsp;VALUE:<input style="width: 100px;" type="text" name="" value="" class="valuee" />&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="del">删除</a></div>
+    </script>
+</html>
