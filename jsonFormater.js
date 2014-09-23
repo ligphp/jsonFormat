@@ -4,8 +4,8 @@ function JsonFormater(opt) {
         tabSize: 2,
         singleTab: "  ",
         quoteKeys: true,
-        imgCollapsed: "http://host.hatustudio.com/images/Collapsed.gif",
-        imgExpanded: "http://host.hatustudio.com/images/Expanded.gif",
+        //imgCollapsed: "http://host.hatustudio.com/images/Collapsed.gif",
+        //imgExpanded: "http://host.hatustudio.com/images/Expanded.gif",
         isCollapsible: true
     }, opt || {});
     this.isFormated = false;
